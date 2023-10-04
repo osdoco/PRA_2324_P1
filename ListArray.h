@@ -1,17 +1,15 @@
- #ifndef LIST_H
-#define LIST_H
+#include <ostream>
 
-template <typename T> 
-class List {
-    public:
-        void append(T e);
-            void prepend(T e);
-            T remove(int pos);
-            T get(int pos);
-            int search(T e);
-            bool empty();
-            int size();
-
+class ListArray{
+	private:
+	       	T* arr;
+		int max;
+		int n;
+		static const int MINSIZE;
+		void resize(int new_size);
+	public:
+		ListArray();
+		~ListArray();
+		T operator[](int pos);
+ friend std::ostream& operator<<(std::ostream &out, const ListArray<T> &list);
 };
-#endif 
-
