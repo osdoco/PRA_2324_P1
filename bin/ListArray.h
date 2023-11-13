@@ -4,7 +4,7 @@ template <typename T>
 class ListArray : public List<T>{
 	private:
 	       	T* arr;
-		int max;
+		int max=0;
 		int n;
 		static const int MINSIZE = 2;
 		void resize(int new_size){
@@ -31,7 +31,7 @@ class ListArray : public List<T>{
 		}
 
 		T operator[](int pos){
-		if (pos <= size - 1 && pos > 0){
+		if (pos <= max && pos >= 0){
 			return  arr[pos];
 		   }
 		else{
@@ -55,7 +55,7 @@ class ListArray : public List<T>{
 	
 //OVERRIDE DE LAS FUNCIONES DE List.h------------------------------------------
 
-	void insert (int pos,T e) override{
+	void insert (int pos,T e){
 		if (pos < 0 || pos > max){
 		throw std::out_of_range("posición inválida");
 		}
@@ -90,7 +90,6 @@ resize(max + 1);
 		else {
        		 T aux;
 		 aux = arr[pos];		 
-                 arr[pos]=nullptr;
 		 for (int i = pos; i<=max;i++){
                 	arr[i]=arr[i+1];
           	 }
@@ -110,7 +109,7 @@ resize(max + 1);
 		 }
 	int search(T e)override{
 		for(int i =0; i < max; i++){
-			if (e = arr[i]){
+			if (e == arr[i]){
 			return i;
 			}
 		}
