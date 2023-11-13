@@ -7,6 +7,19 @@ class ListArray : public List<T>{
 		int max;
 		int n;
 		static const int MINSIZE = 2;
+		void resize(int new_size){
+       			T aux[new_size];
+        		for (int i = 0; i<=new_size;i++){
+               		 aux[i]=arr[i];
+          		}
+        		delete[] arr;
+       			arr = new T[new_size];
+        		for (int i = 0; i<=new_size;i++){
+                		arr[i]=aux[i];
+          		}
+       			max = new_size;
+       		 }
+
 	public:
 		ListArray(){
 		arr = new T[MINSIZE];
@@ -32,28 +45,13 @@ class ListArray : public List<T>{
 	for (int i=0;i<list.n;i++){
 	out<< list.arr[i];
 	
-	if(i< list.n -1){
+	if(i < list.n -1){
 	out << ", ";
 	}
 	}
-	out << "[";
+	out << "]";
 	return out;
  	}
-
-	void resize(int new_size){
-	T aux[new_size];
-	for (int i = 0; i<=new_size;i++){
-		aux[i]=arr[i];
-	  }
-	delete[] arr;
-	arr = new T[new_size];
-	 for (int i = 0; i<=new_size;i++){
-                arr[i]=aux[i];
-          }
-
-	max = new_size;
-	 
-	}
 	
 //OVERRIDE DE LAS FUNCIONES DE List.h------------------------------------------
 
@@ -71,7 +69,7 @@ class ListArray : public List<T>{
 		}
 	 }
 	 void append(T e) override{
-		resize(max + 1);
+resize(max + 1);
 		arr[max] = e;
 		n++;
 		}
@@ -90,10 +88,14 @@ class ListArray : public List<T>{
                        throw std::out_of_range("posición inválida");
                     }
 		else {
-                  T aux= arr[pos];
-                  arr[pos]='nullptr';
+       		 T aux;
+		 aux = arr[pos];		 
+                 arr[pos]=nullptr;
+		 for (int i = pos; i<=max;i++){
+                	arr[i]=arr[i+1];
+          	 }
+		  resize(max-1);
                   return aux;
-		  n--;
                	}
 	 }
 
