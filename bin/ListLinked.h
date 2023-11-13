@@ -32,6 +32,7 @@ class ListLinked : public List<T> {
      	}
     	else{
             	Node<T>* aux;
+		aux = first;
             	for(int i = 0; aux != nullptr && i != pos; i++){
 		  aux = aux->next;
 		  }
@@ -43,13 +44,14 @@ class ListLinked : public List<T> {
     	Node<T>* aux = list.first;
      	out << "[";
      	while(aux != nullptr){
-            	out << aux;
+            	out << aux->data;
             	aux = aux->next;
             	if(aux != nullptr){
             	out<<", ";
             	}
-            	out<<"]";
+            	
      	}
+	out << "]";
      	return out;
  }
 //OVERRIDE DE LAS FUNCIONES DE List.h------------------------------------------
@@ -72,7 +74,7 @@ class ListLinked : public List<T> {
      	void append(T e) override{
             	Node<T>* aux;
             	aux = first;
-            	while(first->next != nullptr){
+            	while(aux->next != nullptr){
             	aux = aux->next;
             	}
 		Node<T>* ele = new Node(e);
@@ -113,6 +115,7 @@ class ListLinked : public List<T> {
               	}
             	else {
             	Node<T>* aux;
+		aux = first;
               	for(int i = 0; first != nullptr && i != pos; i++){
                     	aux = aux->next;
               	}
